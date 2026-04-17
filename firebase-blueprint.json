@@ -1,0 +1,75 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "A user of the job portal.",
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "The user's full name." },
+        "email": { "type": "string", "format": "email", "description": "The user's email address." },
+        "role": { "type": "string", "enum": ["admin", "employer", "seeker"], "description": "The user's role." },
+        "created_at": { "type": "string", "format": "date-time", "description": "When the user was created." }
+      },
+      "required": ["name", "email", "role"]
+    },
+    "Employer": {
+      "title": "Employer",
+      "description": "A company or individual posting jobs.",
+      "type": "object",
+      "properties": {
+        "company_name": { "type": "string", "description": "The name of the company." },
+        "contact_info": { "type": "string", "description": "Contact information for the employer." },
+        "company_description": { "type": "string", "description": "A brief description of the company." }
+      },
+      "required": ["company_name"]
+    },
+    "JobSeeker": {
+      "title": "JobSeeker",
+      "description": "A person looking for a job.",
+      "type": "object",
+      "properties": {
+        "resume": { "type": "string", "description": "URL to the seeker's resume." },
+        "skills": { "type": "string", "description": "A list of the seeker's skills." },
+        "education": { "type": "string", "description": "The seeker's educational background." },
+        "experience": { "type": "string", "description": "The seeker's work experience." }
+      }
+    },
+    "Job": {
+      "title": "Job",
+      "description": "A job posting.",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string", "description": "The title of the job." },
+        "description": { "type": "string", "description": "A detailed description of the job." },
+        "salary": { "type": "string", "description": "The salary range for the job." },
+        "location": { "type": "string", "description": "The location of the job." },
+        "job_type": { "type": "string", "enum": ["Full-time", "Part-time", "Contract", "Remote"], "description": "The type of job." },
+        "employer_uid": { "type": "string", "description": "The UID of the employer who posted the job." },
+        "status": { "type": "string", "enum": ["open", "closed"], "description": "The status of the job posting." },
+        "approved_by_admin": { "type": "boolean", "description": "Whether the job has been approved by an admin." },
+        "created_at": { "type": "string", "format": "date-time", "description": "When the job was posted." }
+      },
+      "required": ["title", "description", "employer_uid"]
+    },
+    "Application": {
+      "title": "Application",
+      "description": "A job application.",
+      "type": "object",
+      "properties": {
+        "job_id": { "type": "string", "description": "The ID of the job being applied for." },
+        "seeker_uid": { "type": "string", "description": "The UID of the seeker who applied." },
+        "status": { "type": "string", "enum": ["Pending", "Reviewed", "Shortlisted", "Rejected", "Accepted"], "description": "The status of the application." },
+        "cover_letter": { "type": "string", "description": "The seeker's cover letter." },
+        "applied_at": { "type": "string", "format": "date-time", "description": "When the application was submitted." }
+      },
+      "required": ["job_id", "seeker_uid"]
+    }
+  },
+  "firestore": {
+    "/users/{uid}": { "schema": "User", "description": "User profiles." },
+    "/employers/{uid}": { "schema": "Employer", "description": "Employer profiles." },
+    "/job_seekers/{uid}": { "schema": "JobSeeker", "description": "Job seeker profiles." },
+    "/jobs/{job_id}": { "schema": "Job", "description": "Job postings." },
+    "/applications/{application_id}": { "schema": "Application", "description": "Job applications." }
+  }
+}
