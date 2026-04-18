@@ -2,8 +2,8 @@
 
 A full-stack, production-style job recruitment system built with React, Node.js, Express, and MySQL.
 
-## 🚀 Project Link
-🔗 [House Rent App](https://github.com/najmul032/House-Rent-App)
+## 🚀 Live Demo
+🔗 [JobPortal](https://job-recruitment-portal-frontend.onrender.com/)
 
 ## 🚀 Features
 
